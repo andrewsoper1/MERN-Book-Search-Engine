@@ -1,17 +1,17 @@
 const typeDefs = `
 type User{
 _id: ID
-username!: String
-email!: String
+username: String
+email: String
 savedBooks: [Book]
 bookCount: Int
 }
 
 type Book{
-bookId!: string
+bookId: String
 authors: [String]
-description!: String
-title!: String
+description: String
+title: String
 image: String
 link: String
 }
@@ -26,8 +26,8 @@ getSingleUser(id: ID, username: String): User
 }
 
 type Mutation{
-createuser(username: String!, email: String!, password: String!): Auth
-login(username: String, email: String, password: string!): Auth
+addUser(username: String!, email: String!, password: String!): Auth
+login(username: String, email: String, password: String!): Auth
 saveBook(bookData: BookInput!): User
 deleteBook(bookId: ID!): User
 }
