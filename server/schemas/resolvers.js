@@ -4,14 +4,17 @@ const { AuthenticationError } = require('apollo-server-express');
 
 const resolvers = {
     Query: {
-        getSingleUser: async (parent, { id, username }) => {
+       me: async (parent, args, context) => {
+        if (context.user) {
             const foundUser = await User.findOne({
-                $or: [{ _id: id }, { username: username }],
+                _id: context.user._id
             });
             if (!foundUser) {
                 throw new AuthenticationError('Cannot find a user with this id or username!');
             }
             return foundUser;
+        }
+        throw new AuthenticationError('You need to be logged in!');
         }
     },
 
@@ -38,11 +41,11 @@ const resolvers = {
             return { token, user };
         },
 
-        saveBook: async (parent, { book }, context) => {
+        saveBook: async (parent, { input }, context) => {
             if (context.user) {
             const updatedUser = await User.findOneAndUpdate(
-                { _id: user._id },
-                { $addToSet: { savedBooks: book } },
+                { _id: context.user._id },
+                { $addToSet: { savedBooks: input } },
                 { new: true, runValidators: true }
             );
             return updatedUser;
@@ -50,10 +53,10 @@ const resolvers = {
         throw new AuthenticationError('You need to be logged in!');
         },
 
-        deleteBook: async (parent, { bookId }, context) => {
+        removeBook: async (parent, { bookId }, context) => {
             if (context.user) {
             const updatedUser = await User.findOneAndUpdate(
-                { _id: user._id },
+                { _id: context.user._id },
                 { $pull: { savedBooks: { bookId } } },
                 { new: true }
             );

@@ -22,14 +22,14 @@ user: User
 }
 
 type Query{
-getSingleUser(id: ID, username: String): User
+me: User
 }
 
 type Mutation{
 addUser(username: String!, email: String!, password: String!): Auth
 login(username: String, email: String, password: String!): Auth
-saveBook(bookData: BookInput!): User
-deleteBook(bookId: ID!): User
+saveBook(input: BookInput!): User
+removeBook(bookId: ID!): User
 }
 
 input BookInput{
