@@ -6,7 +6,7 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
 ## Description
-This web application allows users to search for books they want to purchase using the Google Books API. When you find the book you are trying to purchase you can save it to a list for your account. Once it has been purchased you can remove it from your list.
+This web application allows users to search for books they want to purchase using the Google Books API. Once a user creates an account and is logged in they are able to search for books by title. When you find the book you are trying to purchase you can save it to a list for your account. Once it has been purchased you can remove it from your list.
 ```md
 GIVEN a book search engine
 WHEN I load the search engine
